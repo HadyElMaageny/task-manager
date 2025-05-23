@@ -1,0 +1,12 @@
+# Ignore .NET build output
+TaskManagement/TaskManagement.API/bin/
+TaskManagement/TaskManagement.API/obj/
+TaskManagement/TaskManagement.Core/bin/
+TaskManagement/TaskManagement.Core/obj/
+TaskManagement/TaskManagement.Infrastructure/bin/
+TaskManagement/TaskManagement.Infrastructure/obj/
+TaskManagement/.vscode/
+
+# Ignore node_modules for React
+my-tasks-app/node_modules/
+

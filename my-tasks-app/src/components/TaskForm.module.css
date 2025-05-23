@@ -1,0 +1,49 @@
+/* TaskForm.module.css */
+
+.formContainer {
+  padding: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 1rem auto;
+  background-color: #f9f9f9;
+}
+
+h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+}
+
+button[type="button"] {
+  background-color: #f44336;
+  color: white;
+}
+
+.error-message {
+  color: #d93025;
+  background-color: #fdecea;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\TaskManagement.Core",
+    "\\TaskManagement.Infrastructure",
+    "\\TaskManagement.Infrastructure\\Data"
+  ],
+  "SelectedNode": "\\TaskManagement.Infrastructure",
+  "PreviewInSolutionExplorer": false
+}
