@@ -77,7 +77,35 @@ public static class DataSeeder
                 UpdatedAt = DateTime.UtcNow,
                 IsDeleted = false,
                 DeletedAt = (DateTime?)null
-            }
+            },
+            new
+            {
+                Id = 3L,
+                Title = "Implement authentication",
+                Description = "Set up user authentication and authorization",
+                AssignedUserId = 1L,
+                StartDate = DateTime.UtcNow,
+                EndDate = DateTime.UtcNow.AddDays(7),
+                IsCompleted = false,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+                IsDeleted = false,
+                DeletedAt = (DateTime?)null
+            },
+            new
+            {
+                Id = 4L,
+                Title = "Create API endpoints",
+                Description = "Develop the necessary API endpoints for the application",
+                AssignedUserId = 2L,
+                StartDate = DateTime.UtcNow.AddDays(1),
+                EndDate = DateTime.UtcNow.AddDays(10),
+                IsCompleted = false,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+                IsDeleted = false,
+                DeletedAt = (DateTime?)null
+            },
         };
 
         modelBuilder.Entity<TaskItem>().HasData(tasks);

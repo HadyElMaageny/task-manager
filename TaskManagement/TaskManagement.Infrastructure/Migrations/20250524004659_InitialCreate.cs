@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TaskManagement.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,9 +25,7 @@ namespace TaskManagement.Infrastructure.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -46,44 +44,44 @@ namespace TaskManagement.Infrastructure.Migrations
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsCompleted = table.Column<bool>(type: "bit", nullable: false),
-                    AssignedUserNavId = table.Column<long>(type: "bigint", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TaskItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TaskItems_Users_AssignedUserNavId",
-                        column: x => x.AssignedUserNavId,
+                        name: "FK_TaskItem_User_AssignedUserId",
+                        column: x => x.AssignedUserId,
                         principalTable: "Users",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.InsertData(
-                table: "TaskItems",
-                columns: new[] { "Id", "AssignedUserId", "AssignedUserNavId", "CreatedAt", "DeletedAt", "Description", "EndDate", "IsCompleted", "IsDeleted", "StartDate", "Title", "UpdatedAt" },
-                values: new object[,]
-                {
-                    { 1L, 1L, null, new DateTime(2025, 5, 21, 20, 42, 51, 735, DateTimeKind.Utc).AddTicks(9229), null, "Set up the initial project structure", new DateTime(2025, 5, 24, 20, 42, 51, 735, DateTimeKind.Utc).AddTicks(9229), false, false, new DateTime(2025, 5, 19, 20, 42, 51, 735, DateTimeKind.Utc).AddTicks(9218), "Initialize project", new DateTime(2025, 5, 21, 20, 42, 51, 735, DateTimeKind.Utc).AddTicks(9230) },
-                    { 2L, 2L, null, new DateTime(2025, 5, 21, 20, 42, 51, 735, DateTimeKind.Utc).AddTicks(9233), null, "Design the database schema", new DateTime(2025, 5, 26, 20, 42, 51, 735, DateTimeKind.Utc).AddTicks(9233), false, false, new DateTime(2025, 5, 20, 20, 42, 51, 735, DateTimeKind.Utc).AddTicks(9232), "Database design", new DateTime(2025, 5, 21, 20, 42, 51, 735, DateTimeKind.Utc).AddTicks(9233) }
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "CreatedAt", "DeletedAt", "Email", "FirstName", "IsDeleted", "LastName", "Password", "UpdatedAt", "UserName" },
+                columns: new[] { "Id", "CreatedAt", "Email", "FirstName", "LastName", "Password", "UpdatedAt", "UserName" },
                 values: new object[,]
                 {
-                    { 1L, new DateTime(2025, 5, 21, 20, 42, 51, 735, DateTimeKind.Utc).AddTicks(9133), null, "admin@example.com", "System", false, "Admin", "Admin@123", new DateTime(2025, 5, 21, 20, 42, 51, 735, DateTimeKind.Utc).AddTicks(9134), "admin" },
-                    { 2L, new DateTime(2025, 5, 21, 20, 42, 51, 735, DateTimeKind.Utc).AddTicks(9139), null, "john.doe@example.com", "John", false, "Doe", "John@123", new DateTime(2025, 5, 21, 20, 42, 51, 735, DateTimeKind.Utc).AddTicks(9139), "johndoe" }
+                    { 1L, new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9528), "admin@example.com", "System", "Admin", "Admin@123", new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9530), "admin" },
+                    { 2L, new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9535), "john.doe@example.com", "John", "Doe", "John@123", new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9535), "johndoe" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TaskItems",
+                columns: new[] { "Id", "AssignedUserId", "CreatedAt", "Description", "EndDate", "IsCompleted", "StartDate", "Title", "UpdatedAt" },
+                values: new object[,]
+                {
+                    { 1L, 1L, new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9609), "Set up the initial project structure", new DateTime(2025, 5, 27, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9609), false, new DateTime(2025, 5, 22, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9604), "Initialize project", new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9610) },
+                    { 2L, 2L, new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9612), "Design the database schema", new DateTime(2025, 5, 29, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9612), false, new DateTime(2025, 5, 23, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9612), "Database design", new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9613) },
+                    { 3L, 1L, new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9614), "Set up user authentication and authorization", new DateTime(2025, 5, 31, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9614), false, new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9614), "Implement authentication", new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9615) },
+                    { 4L, 2L, new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9620), "Develop the necessary API endpoints for the application", new DateTime(2025, 6, 3, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9619), false, new DateTime(2025, 5, 25, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9619), "Create API endpoints", new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9620) }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_TaskItems_AssignedUserNavId",
+                name: "IX_TaskItems_AssignedUserId",
                 table: "TaskItems",
-                column: "AssignedUserNavId");
+                column: "AssignedUserId");
         }
 
         /// <inheritdoc />

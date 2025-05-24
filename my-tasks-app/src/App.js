@@ -11,8 +11,17 @@ function App() {
   const [mode, setMode] = useState("list"); // "list" | "add" | "edit"
 
   const loadTasks = async () => {
-    const response = await getTasks();
-    setTasks(response.data);
+    try {
+      const response = await getTasks();
+      setTasks(response.data);
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        console.warn("No tasks found.");
+        setTasks([]);
+      } else {
+        console.error("Failed to load tasks:", error);
+      }
+    }
   };
 
   const handleAddClick = () => {
@@ -54,8 +63,17 @@ function App() {
       <h1>📝 My Tasks</h1>
       {mode === "list" && (
         <>
-          <button className={styles.addButton} onClick={handleAddClick}>➕ Add Task</button>
-          <TaskList tasks={tasks} onEdit={handleEditClick} onMarkComplete={handleMarkComplete} />
+          {tasks.length > 0 && (
+            <button className={styles.addButton} onClick={handleAddClick}>
+              ➕ Add Task
+            </button>
+          )}
+          <TaskList
+          tasks={tasks}
+          onEdit={handleEditClick}
+          onMarkComplete={handleMarkComplete}
+          onAddClick={handleAddClick}
+        />
         </>
       )}
       {(mode === "add" || mode === "edit") && (

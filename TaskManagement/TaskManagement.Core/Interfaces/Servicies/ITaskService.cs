@@ -8,7 +8,7 @@ namespace TaskManagement.Core.Interfaces.Services
         Task UpdateTask(long id, TaskSaveDto dto);
         Task<List<TaskDto>> ListTasks();
         Task MarkComplete(long id);
-        Task<TaskDto> GetTaskById(long id);
-        Task DeleteTask(long id);
+        Task<TaskDto?> GetTaskById(long id);
+        Task<bool> DeleteTask(long id);
     }
 }
