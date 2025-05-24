@@ -14,13 +14,10 @@ namespace TaskManagement.Core.Services
             _taskRepo = taskRepo;
         }
 
-        public async Task<TaskDto> GetTaskById(long id)
+        public async Task<TaskDto?> GetTaskById(long id)
         {
             var task = await _taskRepo.GetByIdAsync(id);
-            if (task == null)
-                throw new KeyNotFoundException($"Task with ID {id} not found.");
-
-            return task.ToTaskDto();
+            return task == null ? null : task.ToTaskDto();
         }
 
         public async Task<long> CreateTask(TaskSaveDto dto)
@@ -58,14 +55,15 @@ namespace TaskManagement.Core.Services
             await _taskRepo.SaveChangesAsync();
         }
 
-        public async Task DeleteTask(long id)
+        public async Task<bool> DeleteTask(long id)
         {
             var task = await _taskRepo.GetByIdAsync(id);
             if (task == null)
-                throw new KeyNotFoundException($"Task with ID {id} not found.");
+                return false;
 
             await _taskRepo.DeleteAsync(task);
             await _taskRepo.SaveChangesAsync();
+            return true;
         }
     }
 }

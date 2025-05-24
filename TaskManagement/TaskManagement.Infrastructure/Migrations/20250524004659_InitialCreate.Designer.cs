@@ -12,8 +12,8 @@ using TaskManagement.Infrastructure.Data;
 namespace TaskManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250521204306_SeedUsersAndTasks")]
-    partial class SeedUsersAndTasks
+    [Migration("20250524004659_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,15 +34,10 @@ namespace TaskManagement.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<long>("AssignedUserId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("AssignedUserNavId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("AssignedUserId");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -53,9 +48,6 @@ namespace TaskManagement.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsCompleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("StartDate")
@@ -70,7 +62,7 @@ namespace TaskManagement.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AssignedUserNavId");
+                    b.HasIndex("AssignedUserId");
 
                     b.ToTable("TaskItems");
 
@@ -79,27 +71,49 @@ namespace TaskManagement.Infrastructure.Migrations
                         {
                             Id = 1L,
                             AssignedUserId = 1L,
-                            CreatedAt = new DateTime(2025, 5, 21, 20, 43, 5, 941, DateTimeKind.Utc).AddTicks(2098),
+                            CreatedAt = new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9609),
                             Description = "Set up the initial project structure",
-                            EndDate = new DateTime(2025, 5, 24, 20, 43, 5, 941, DateTimeKind.Utc).AddTicks(2098),
+                            EndDate = new DateTime(2025, 5, 27, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9609),
                             IsCompleted = false,
-                            IsDeleted = false,
-                            StartDate = new DateTime(2025, 5, 19, 20, 43, 5, 941, DateTimeKind.Utc).AddTicks(2089),
+                            StartDate = new DateTime(2025, 5, 22, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9604),
                             Title = "Initialize project",
-                            UpdatedAt = new DateTime(2025, 5, 21, 20, 43, 5, 941, DateTimeKind.Utc).AddTicks(2099)
+                            UpdatedAt = new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9610)
                         },
                         new
                         {
                             Id = 2L,
                             AssignedUserId = 2L,
-                            CreatedAt = new DateTime(2025, 5, 21, 20, 43, 5, 941, DateTimeKind.Utc).AddTicks(2104),
+                            CreatedAt = new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9612),
                             Description = "Design the database schema",
-                            EndDate = new DateTime(2025, 5, 26, 20, 43, 5, 941, DateTimeKind.Utc).AddTicks(2103),
+                            EndDate = new DateTime(2025, 5, 29, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9612),
                             IsCompleted = false,
-                            IsDeleted = false,
-                            StartDate = new DateTime(2025, 5, 20, 20, 43, 5, 941, DateTimeKind.Utc).AddTicks(2103),
+                            StartDate = new DateTime(2025, 5, 23, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9612),
                             Title = "Database design",
-                            UpdatedAt = new DateTime(2025, 5, 21, 20, 43, 5, 941, DateTimeKind.Utc).AddTicks(2104)
+                            UpdatedAt = new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9613)
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            AssignedUserId = 1L,
+                            CreatedAt = new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9614),
+                            Description = "Set up user authentication and authorization",
+                            EndDate = new DateTime(2025, 5, 31, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9614),
+                            IsCompleted = false,
+                            StartDate = new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9614),
+                            Title = "Implement authentication",
+                            UpdatedAt = new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9615)
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            AssignedUserId = 2L,
+                            CreatedAt = new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9620),
+                            Description = "Develop the necessary API endpoints for the application",
+                            EndDate = new DateTime(2025, 6, 3, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9619),
+                            IsCompleted = false,
+                            StartDate = new DateTime(2025, 5, 25, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9619),
+                            Title = "Create API endpoints",
+                            UpdatedAt = new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9620)
                         });
                 });
 
@@ -114,9 +128,6 @@ namespace TaskManagement.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -124,9 +135,6 @@ namespace TaskManagement.Infrastructure.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -151,25 +159,23 @@ namespace TaskManagement.Infrastructure.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2025, 5, 21, 20, 43, 5, 941, DateTimeKind.Utc).AddTicks(1960),
+                            CreatedAt = new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9528),
                             Email = "admin@example.com",
                             FirstName = "System",
-                            IsDeleted = false,
                             LastName = "Admin",
                             Password = "Admin@123",
-                            UpdatedAt = new DateTime(2025, 5, 21, 20, 43, 5, 941, DateTimeKind.Utc).AddTicks(1962),
+                            UpdatedAt = new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9530),
                             UserName = "admin"
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedAt = new DateTime(2025, 5, 21, 20, 43, 5, 941, DateTimeKind.Utc).AddTicks(1966),
+                            CreatedAt = new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9535),
                             Email = "john.doe@example.com",
                             FirstName = "John",
-                            IsDeleted = false,
                             LastName = "Doe",
                             Password = "John@123",
-                            UpdatedAt = new DateTime(2025, 5, 21, 20, 43, 5, 941, DateTimeKind.Utc).AddTicks(1967),
+                            UpdatedAt = new DateTime(2025, 5, 24, 0, 46, 58, 560, DateTimeKind.Utc).AddTicks(9535),
                             UserName = "johndoe"
                         });
                 });
@@ -177,10 +183,18 @@ namespace TaskManagement.Infrastructure.Migrations
             modelBuilder.Entity("TaskManagement.Core.Entities.TaskItem", b =>
                 {
                     b.HasOne("TaskManagement.Core.Entities.User", "AssignedUserNav")
-                        .WithMany()
-                        .HasForeignKey("AssignedUserNavId");
+                        .WithMany("TaskItems")
+                        .HasForeignKey("AssignedUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("FK_TaskItem_User_AssignedUserId");
 
                     b.Navigation("AssignedUserNav");
+                });
+
+            modelBuilder.Entity("TaskManagement.Core.Entities.User", b =>
+                {
+                    b.Navigation("TaskItems");
                 });
 #pragma warning restore 612, 618
         }

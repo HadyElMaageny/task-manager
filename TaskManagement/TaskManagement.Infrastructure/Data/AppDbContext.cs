@@ -16,6 +16,17 @@ namespace TaskManagement.Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<TaskItem>(entity =>
+            {
+                entity.HasOne(t => t.AssignedUserNav)
+                    .WithMany(u => u.Tasks)
+                    .HasForeignKey(t => t.AssignedUserId)
+                    .HasConstraintName("FK_TaskItem_User_AssignedUserId")
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.Property(t => t.AssignedUserId).HasColumnName("AssignedUserId");
+            });
+
             // Apply configurations
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
 
